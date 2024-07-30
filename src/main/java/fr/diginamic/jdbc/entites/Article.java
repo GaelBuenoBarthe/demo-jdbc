@@ -2,16 +2,33 @@ package fr.diginamic.jdbc.entites;
 
 public class Article {
     private int id;
+    private String ref;
     private String designation;
     private double prix;
     private Fournisseur fournisseur;
-    private String ref;
 
-    public Article(int id, String designation, double prix, Fournisseur fournisseur) {
+    public Article(int id, String ref, String designation, double prix, Fournisseur fournisseur) {
         this.id = id;
+        this.ref = ref;
         this.designation = designation;
         this.prix = prix;
         this.fournisseur = fournisseur;
+    }
+
+    // Getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
         this.ref = ref;
     }
 
@@ -39,22 +56,14 @@ public class Article {
         this.fournisseur = fournisseur;
     }
 
-    public String getRef() {
-        return ref;
-    }
-
-    public void setRef(String ref) {
-        this.ref = ref;
-    }
-
     @Override
     public String toString() {
         return "Article{" +
                 "id=" + id +
+                ", ref='" + ref + '\'' +
                 ", designation='" + designation + '\'' +
                 ", prix=" + prix +
                 ", fournisseur=" + fournisseur +
-                ", ref='" + ref + '\'' +
                 '}';
     }
 }

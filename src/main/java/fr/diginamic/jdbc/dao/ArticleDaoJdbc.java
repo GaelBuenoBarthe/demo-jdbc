@@ -11,19 +11,21 @@ import static fr.diginamic.TestConnexionJdbc.*;
 
 public class ArticleDaoJdbc {
 
-    private static final String INSERT_ARTICLE = "INSERT INTO article (designation, prix, ID_FOU, REF) VALUES (?, ?, ?, ?)";
+    private static final String INSERT_ARTICLE = "INSERT INTO article (id, ref, designation, prix, ID_FOU) VALUES (?, ?, ?, ?, ?)";
     private static final String UPDATE_PRIX = "UPDATE article SET prix = prix * 0.75 WHERE designation LIKE '%mate%'";
     private static final String SELECT_ALL_ARTICLES = "SELECT * FROM article";
     private static final String AVERAGE_PRIX = "SELECT AVG(prix) AS avg_prix FROM article";
     private static final String DELETE_ARTICLES_BY_NAME = "DELETE FROM article WHERE designation LIKE '%Peinture%'";
+    private static final String EXISTS_ARTICLE = "SELECT COUNT(*) FROM article WHERE id = ?";
 
     public void insertArticle(Article article) throws SQLException {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
              PreparedStatement statement = connection.prepareStatement(INSERT_ARTICLE)) {
-            statement.setString(1, article.getDesignation());
-            statement.setDouble(2, article.getPrix());
-            statement.setInt(3, article.getFournisseur().getId());
-            statement.setString(4, article.getRef()); // Assuming Article class has a getRef() method
+            statement.setInt(1, article.getId());
+            statement.setString(2, article.getRef());
+            statement.setString(3, article.getDesignation());
+            statement.setDouble(4, article.getPrix());
+            statement.setInt(5, article.getFournisseur().getId());
             statement.executeUpdate();
         }
     }
@@ -42,12 +44,12 @@ public class ArticleDaoJdbc {
              ResultSet resultSet = statement.executeQuery(SELECT_ALL_ARTICLES)) {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
+                String ref = resultSet.getString("ref");
                 String designation = resultSet.getString("designation");
                 double prix = resultSet.getDouble("prix");
                 int fournisseurId = resultSet.getInt("ID_FOU");
-                String ref = resultSet.getString("REF");
                 Fournisseur fournisseur = new Fournisseur(fournisseurId, "La Maison de la Peinture"); // Simplified for example
-                articles.add(new Article(id, designation, prix, fournisseur)); // Assuming Article class has a constructor with ref
+                articles.add(new Article(id, ref, designation, prix, fournisseur));
             }
         }
         return articles;
@@ -69,5 +71,18 @@ public class ArticleDaoJdbc {
              PreparedStatement statement = connection.prepareStatement(DELETE_ARTICLES_BY_NAME)) {
             statement.executeUpdate();
         }
+    }
+
+    public boolean exists(int id) throws SQLException {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+             PreparedStatement statement = connection.prepareStatement(EXISTS_ARTICLE)) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
     }
 }
