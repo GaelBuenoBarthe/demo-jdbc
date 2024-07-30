@@ -73,4 +73,14 @@ public class FournisseurDaoJdbc2 implements FournisseurDao {
         }
         return rowDeleted;
     }
+
+    @Override
+    public void deleteFournisseur(int id) {
+
+    }
+
+    @Override
+    public void insertFournisseur(Fournisseur fournisseur) {
+
+    }
 }
