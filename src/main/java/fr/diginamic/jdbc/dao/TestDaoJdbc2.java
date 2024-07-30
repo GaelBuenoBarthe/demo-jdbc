@@ -19,28 +19,28 @@ public class TestDaoJdbc2 {
             System.out.println(fournisseur);
         }
 
-        // Update the supplier "France de matériaux" to "France matériaux"
+        // Maj du fournisseur "France de matériaux" en "France matériaux"
         fournisseurDao.update("France de matériaux", "France matériaux");
 
-        // Display the list of suppliers after update
+        // Affiche la liste des fournisseurs modifiée
         fournisseurs = fournisseurDao.extraire();
         System.out.println("Liste des fournisseurs après modification:");
         for (Fournisseur fournisseur : fournisseurs) {
             System.out.println(fournisseur);
         }
 
-        // Delete the supplier "France matériaux"
+        // Supprime le fournisseur "France matériaux"
         Fournisseur fournisseurToDelete = new Fournisseur(1, "France matériaux");
         fournisseurDao.delete(fournisseurToDelete);
 
-        // Display the list of suppliers after deletion
+        // Affiche la liste des fournisseurs après suppression
         fournisseurs = fournisseurDao.extraire();
         System.out.println("Liste des fournisseurs après suppression:");
         for (Fournisseur fournisseur : fournisseurs) {
             System.out.println(fournisseur);
         }
 
-        // Try to insert a supplier with an apostrophe
+        // Essaye d'insérer un fournisseur avec une apostrophe
         Fournisseur fournisseurWithQuote = new Fournisseur(2, "L’Espace Création");
         try {
             fournisseurDao.insert(fournisseurWithQuote);
@@ -49,7 +49,7 @@ public class TestDaoJdbc2 {
             e.printStackTrace();
         }
 
-        // Display the list of suppliers after the attempt to insert with an apostrophe
+        // Affiche la liste des fournisseurs après la tentative d'ajout avec une apostrophe
         fournisseurs = fournisseurDao.extraire();
         System.out.println("Liste des fournisseurs après la tentative d'insertion d'une apostrophe:");
         for (Fournisseur fournisseur : fournisseurs) {

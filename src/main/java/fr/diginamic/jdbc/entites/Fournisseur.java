@@ -1,8 +1,17 @@
 package fr.diginamic.jdbc.entites;
 
 public class Fournisseur {
+
     private int id;
     private String nom;
+
+    public Fournisseur() {
+        this(-1, "");
+    }
+
+    public Fournisseur(String nom) {
+        this(-1, nom);
+    }
 
     public Fournisseur(int id, String nom) {
         this.id = id;
@@ -27,6 +36,10 @@ public class Fournisseur {
 
     @Override
     public String toString() {
-        return "Fournisseur{id=" + id + ", nom='" + nom + "'}";
+        final StringBuilder sb = new StringBuilder("Fournisseur{");
+        sb.append("id=").append(id);
+        sb.append(", nom='").append(nom).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

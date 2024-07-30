@@ -33,7 +33,7 @@ public class TestDaoJdbc {
         Fournisseur fournisseurToDelete = new Fournisseur(1, "France matériaux");
         fournisseurDao.delete(fournisseurToDelete);
 
-        // Affiche la liste des fournisseurs modifiée
+        // Affiche la liste des fournisseurs après suppression
         fournisseurs = fournisseurDao.extraire();
         System.out.println("Liste des fournisseurs après suppression:");
         for (Fournisseur fournisseur : fournisseurs) {
