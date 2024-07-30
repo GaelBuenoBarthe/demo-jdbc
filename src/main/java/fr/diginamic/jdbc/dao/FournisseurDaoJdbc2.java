@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static fr.diginamic.TestConnexionJdbc.*;
 
-public class FournisseurDaoJdbc implements FournisseurDao {
+public class FournisseurDaoJdbc2 implements FournisseurDao {
 
 
     @Override
@@ -14,8 +14,8 @@ public class FournisseurDaoJdbc implements FournisseurDao {
         List<Fournisseur> fournisseurs = new ArrayList<>();
         String sql = "SELECT id, nom FROM fournisseur";
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -31,11 +31,13 @@ public class FournisseurDaoJdbc implements FournisseurDao {
 
     @Override
     public void insert(Fournisseur fournisseur) {
-        String sql = "INSERT INTO fournisseur (id, nom) VALUES (" + fournisseur.getId() + ", '" + fournisseur.getNom() + "')";
+        String sql = "INSERT INTO fournisseur (id, nom) VALUES (?, ?)";
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-             Statement statement = connection.createStatement()) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.executeUpdate(sql);
+            statement.setInt(1, fournisseur.getId());
+            statement.setString(2, fournisseur.getNom());
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,12 +45,14 @@ public class FournisseurDaoJdbc implements FournisseurDao {
 
     @Override
     public int update(String ancienNom, String nouveauNom) {
-        String sql = "UPDATE fournisseur SET nom = '" + nouveauNom + "' WHERE nom = '" + ancienNom + "'";
+        String sql = "UPDATE fournisseur SET nom = ? WHERE nom = ?";
         int rowsUpdated = 0;
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-             Statement statement = connection.createStatement()) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            rowsUpdated = statement.executeUpdate(sql);
+            statement.setString(1, nouveauNom);
+            statement.setString(2, ancienNom);
+            rowsUpdated = statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,12 +61,13 @@ public class FournisseurDaoJdbc implements FournisseurDao {
 
     @Override
     public boolean delete(Fournisseur fournisseur) {
-        String sql = "DELETE FROM fournisseur WHERE id = " + fournisseur.getId();
+        String sql = "DELETE FROM fournisseur WHERE id = ?";
         boolean rowDeleted = false;
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-             Statement statement = connection.createStatement()) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            rowDeleted = statement.executeUpdate(sql) > 0;
+            statement.setInt(1, fournisseur.getId());
+            rowDeleted = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }

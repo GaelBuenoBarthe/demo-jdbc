@@ -4,19 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import static fr.diginamic.TestConnexionJdbc.*;
 
 public class TestInsertion {
-    private static final String DB_URL;
-    private static final String DB_USER;
-    private static final String DB_PWD;
-
-    static {
-        ResourceBundle bundle = ResourceBundle.getBundle("db");
-        DB_URL = bundle.getString("db.url");
-        DB_USER = bundle.getString("db.user");
-        DB_PWD = bundle.getString("db.pwd");
-    }
 
     public static void main(String[] args) {
         Connection connection = null;

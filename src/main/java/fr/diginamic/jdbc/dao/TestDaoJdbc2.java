@@ -4,9 +4,9 @@ import fr.diginamic.jdbc.entites.Fournisseur;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TestDaoJdbc {
+public class TestDaoJdbc2 {
     public static void main(String[] args) throws SQLException {
-        FournisseurDao fournisseurDao = new FournisseurDaoJdbc();
+        FournisseurDao fournisseurDao = new FournisseurDaoJdbc2();
 
         // Insere le fournisseur "France de matériaux"
         Fournisseur fournisseur1 = new Fournisseur(1, "France de matériaux");
@@ -14,33 +14,33 @@ public class TestDaoJdbc {
 
         // Affiche la liste des fournisseurs
         List<Fournisseur> fournisseurs = fournisseurDao.extraire();
-        System.out.println("Liste des fournisseurs aprés insertion:");
+        System.out.println("Liste des fournisseurs après insertion:");
         for (Fournisseur fournisseur : fournisseurs) {
             System.out.println(fournisseur);
         }
 
-        // Maj du fournisseur "France de matériaux" en "France matériaux"
+        // Update the supplier "France de matériaux" to "France matériaux"
         fournisseurDao.update("France de matériaux", "France matériaux");
 
-        // Affiche la liste des fournisseurs modifiée
+        // Display the list of suppliers after update
         fournisseurs = fournisseurDao.extraire();
         System.out.println("Liste des fournisseurs après modification:");
         for (Fournisseur fournisseur : fournisseurs) {
             System.out.println(fournisseur);
         }
 
-        // Supprime le fournisseur "France matériaux"
+        // Delete the supplier "France matériaux"
         Fournisseur fournisseurToDelete = new Fournisseur(1, "France matériaux");
         fournisseurDao.delete(fournisseurToDelete);
 
-        // Affiche la liste des fournisseurs modifiée
+        // Display the list of suppliers after deletion
         fournisseurs = fournisseurDao.extraire();
         System.out.println("Liste des fournisseurs après suppression:");
         for (Fournisseur fournisseur : fournisseurs) {
             System.out.println(fournisseur);
         }
 
-        // Essaye d'insérer un fournisseur avec une apostrophe
+        // Try to insert a supplier with an apostrophe
         Fournisseur fournisseurWithQuote = new Fournisseur(2, "L’Espace Création");
         try {
             fournisseurDao.insert(fournisseurWithQuote);
@@ -49,7 +49,7 @@ public class TestDaoJdbc {
             e.printStackTrace();
         }
 
-        // Affiche la liste des fournisseurs modifiée
+        // Display the list of suppliers after the attempt to insert with an apostrophe
         fournisseurs = fournisseurDao.extraire();
         System.out.println("Liste des fournisseurs après la tentative d'insertion d'une apostrophe:");
         for (Fournisseur fournisseur : fournisseurs) {

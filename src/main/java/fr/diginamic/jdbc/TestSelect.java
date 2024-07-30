@@ -1,39 +1,24 @@
 package fr.diginamic.jdbc;
 
 import fr.diginamic.jdbc.entites.Fournisseur;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+import static fr.diginamic.TestConnexionJdbc.*;
 
 public class TestSelect {
-    private static final String DB_URL;
-    private static final String DB_USER;
-    private static final String DB_PWD;
 
-    static {
-        ResourceBundle bundle = ResourceBundle.getBundle("db");
-        DB_URL = bundle.getString("db.url");
-        DB_USER = bundle.getString("db.user");
-        DB_PWD = bundle.getString("db.pwd");
-    }
-
+    private static final String SELECT_QUERY = "SELECT * FROM fournisseur";
     public static void main(String[] args) {
         Connection connection = null;
-        PreparedStatement statement = null;
+        Statement statement = null;
         ResultSet resultSet = null;
         List<Fournisseur> fournisseurs = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-            String sql = "SELECT id, nom FROM fournisseur";
-            statement = connection.prepareStatement(sql);
-            resultSet = statement.executeQuery();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(SELECT_QUERY);
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");

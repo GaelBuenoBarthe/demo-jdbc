@@ -1,4 +1,4 @@
-package fr.digi.m052024;
+package fr.diginamic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class TestConnexionJdbc {
-    private static final String DB_URL ;
-    private static final String DB_USER ;
-    private static final String DB_PWD ;
+    public static final String DB_URL ;
+    public static final String DB_USER ;
+    public static final String DB_PWD ;
 
     static{
         ResourceBundle bundle = ResourceBundle.getBundle("db");
