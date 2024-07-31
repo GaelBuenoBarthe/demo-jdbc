@@ -41,7 +41,7 @@ public class TestDaoJdbc {
         }
 
         // Essaye d'insérer un fournisseur avec une apostrophe
-        Fournisseur fournisseurWithQuote = new Fournisseur(2, "L’Espace Création");
+        Fournisseur fournisseurWithQuote = new Fournisseur(5, "L’Espace Création");
         try {
             fournisseurDao.insert(fournisseurWithQuote);
         } catch (Exception e) {
