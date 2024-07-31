@@ -5,14 +5,6 @@ public class Fournisseur {
     private int id;
     private String nom;
 
-    public Fournisseur() {
-        this(-1, "");
-    }
-
-    public Fournisseur(String nom) {
-        this(-1, nom);
-    }
-
     public Fournisseur(int id, String nom) {
         this.id = id;
         this.nom = nom;
@@ -21,17 +13,8 @@ public class Fournisseur {
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNom() {
         return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
     }
 
     @Override
