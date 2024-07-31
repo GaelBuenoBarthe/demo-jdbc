@@ -1,5 +1,7 @@
-package fr.diginamic.jdbc.dao;
+package fr.diginamic.jdbc.test;
 
+import fr.diginamic.jdbc.dao.fournisseur.FournisseurDao;
+import fr.diginamic.jdbc.dao.fournisseur.FournisseurDaoJdbc;
 import fr.diginamic.jdbc.entites.Fournisseur;
 import java.sql.SQLException;
 import java.util.List;

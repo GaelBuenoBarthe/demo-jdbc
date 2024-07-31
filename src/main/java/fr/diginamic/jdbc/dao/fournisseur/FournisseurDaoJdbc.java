@@ -1,4 +1,4 @@
-package fr.diginamic.jdbc.dao;
+package fr.diginamic.jdbc.dao.fournisseur;
 
 import fr.diginamic.jdbc.entites.Fournisseur;
 
@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.diginamic.TestConnexionJdbc.*;
+import static fr.diginamic.jdbc.test.TestConnexionJdbc.*;
 
 public class FournisseurDaoJdbc implements FournisseurDao {
 

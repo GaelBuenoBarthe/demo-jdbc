@@ -1,12 +1,12 @@
-package fr.diginamic.jdbc;
+package fr.diginamic.jdbc.test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import static fr.diginamic.TestConnexionJdbc.*;
+import static fr.diginamic.jdbc.test.TestConnexionJdbc.*;
 
-public class TestDelete {
+public class TestInsertion {
 
     public static void main(String[] args) {
         Connection connection = null;
@@ -14,12 +14,12 @@ public class TestDelete {
 
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-            String sql = "DELETE FROM fournisseur WHERE nom = ?";
+            String sql = "INSERT INTO fournisseur (nom) VALUES (?)";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "La Maison des Peintures");
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("Le fournisseur a été supprimé avec succès!");
+            statement.setString(1, "La Maison de la Peinture");
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Un nouveau fournisseur a été inséré avec succès!");
             }
         } catch (SQLException e) {
             e.printStackTrace();

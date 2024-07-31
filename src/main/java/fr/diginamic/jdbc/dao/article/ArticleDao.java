@@ -1,4 +1,4 @@
-package fr.diginamic.jdbc.dao;
+package fr.diginamic.jdbc.dao.article;
 
 import fr.diginamic.jdbc.entites.Article;
 import java.sql.SQLException;

@@ -1,7 +1,7 @@
-package fr.diginamic.jdbc;
+package fr.diginamic.jdbc.test;
 
-import fr.diginamic.jdbc.dao.ArticleDaoJdbc;
-import fr.diginamic.jdbc.dao.FournisseurDaoJdbc;
+import fr.diginamic.jdbc.dao.article.ArticleDaoJdbc;
+import fr.diginamic.jdbc.dao.fournisseur.FournisseurDaoJdbc;
 import fr.diginamic.jdbc.entites.Article;
 import fr.diginamic.jdbc.entites.Fournisseur;
 

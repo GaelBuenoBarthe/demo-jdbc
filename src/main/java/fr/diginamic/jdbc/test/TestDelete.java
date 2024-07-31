@@ -1,0 +1,99 @@
+package fr.diginamic.jdbc.test;
+
+import fr.diginamic.jdbc.dao.fournisseur.FournisseurDao;
+import fr.diginamic.jdbc.dao.fournisseur.FournisseurDaoJdbc;
+import fr.diginamic.jdbc.entites.Fournisseur;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import static fr.diginamic.jdbc.test.TestConnexionJdbc.*;
+
+public class TestDelete {
+
+    public static void main(String[] args) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+            String sql = "DELETE FROM fournisseur WHERE nom = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "La Maison des Peintures");
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Le fournisseur a été supprimé avec succès!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static class TestDaoJdbc {
+        public static void main(String[] args) throws SQLException {
+            FournisseurDao fournisseurDao = new FournisseurDaoJdbc();
+
+            // Insere le fournisseur "France de matériaux"
+            Fournisseur fournisseur1 = new Fournisseur(1, "France de matériaux");
+            fournisseurDao.insert(fournisseur1);
+
+            // Affiche la liste des fournisseurs
+            List<Fournisseur> fournisseurs = fournisseurDao.extraire();
+            System.out.println("Liste des fournisseurs aprés insertion:");
+            for (Fournisseur fournisseur : fournisseurs) {
+                System.out.println(fournisseur);
+            }
+
+            // Maj du fournisseur "France de matériaux" en "France matériaux"
+            fournisseurDao.update("France de matériaux", "France matériaux");
+
+            // Affiche la liste des fournisseurs modifiée
+            fournisseurs = fournisseurDao.extraire();
+            System.out.println("Liste des fournisseurs après modification:");
+            for (Fournisseur fournisseur : fournisseurs) {
+                System.out.println(fournisseur);
+            }
+
+            // Supprime le fournisseur "France matériaux"
+            Fournisseur fournisseurToDelete = new Fournisseur(1, "France matériaux");
+            fournisseurDao.delete(fournisseurToDelete);
+
+            // Affiche la liste des fournisseurs après suppression
+            fournisseurs = fournisseurDao.extraire();
+            System.out.println("Liste des fournisseurs après suppression:");
+            for (Fournisseur fournisseur : fournisseurs) {
+                System.out.println(fournisseur);
+            }
+
+            // Essaye d'insérer un fournisseur avec une apostrophe
+            Fournisseur fournisseurWithQuote = new Fournisseur(5, "L’Espace Création");
+            try {
+                fournisseurDao.insert(fournisseurWithQuote);
+            } catch (Exception e) {
+                System.err.println("Erreur générale lors de l'insertion d'une apostrophe: " + e.getMessage());
+                e.printStackTrace();
+            }
+
+            // Affiche la liste des fournisseurs modifiée
+            fournisseurs = fournisseurDao.extraire();
+            System.out.println("Liste des fournisseurs après la tentative d'insertion d'une apostrophe:");
+            for (Fournisseur fournisseur : fournisseurs) {
+                System.out.println(fournisseur);
+            }
+        }
+    }
+}

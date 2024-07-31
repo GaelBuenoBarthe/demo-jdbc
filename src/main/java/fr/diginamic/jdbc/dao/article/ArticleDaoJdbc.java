@@ -1,4 +1,4 @@
-package fr.diginamic.jdbc.dao;
+package fr.diginamic.jdbc.dao.article;
 
 import fr.diginamic.jdbc.entites.Article;
 import fr.diginamic.jdbc.entites.Fournisseur;
@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.diginamic.TestConnexionJdbc.*;
+import static fr.diginamic.jdbc.test.TestConnexionJdbc.*;
 
 public class ArticleDaoJdbc implements ArticleDao {
 

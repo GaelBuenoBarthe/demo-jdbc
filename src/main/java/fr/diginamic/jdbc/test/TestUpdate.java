@@ -1,10 +1,10 @@
-package fr.diginamic.jdbc;
+package fr.diginamic.jdbc.test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import static fr.diginamic.TestConnexionJdbc.*;
+import static fr.diginamic.jdbc.test.TestConnexionJdbc.*;
 
 public class TestUpdate {
 

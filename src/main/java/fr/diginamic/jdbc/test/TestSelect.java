@@ -1,7 +1,7 @@
-package fr.diginamic.jdbc;
+package fr.diginamic.jdbc.test;
 
 import fr.diginamic.jdbc.entites.Fournisseur;
-import static fr.diginamic.TestConnexionJdbc.*;
+import static fr.diginamic.jdbc.test.TestConnexionJdbc.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

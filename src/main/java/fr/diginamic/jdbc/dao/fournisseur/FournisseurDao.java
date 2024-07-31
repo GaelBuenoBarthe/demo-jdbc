@@ -1,4 +1,4 @@
-package fr.diginamic.jdbc.dao;
+package fr.diginamic.jdbc.dao.fournisseur;
 
 import fr.diginamic.jdbc.entites.Fournisseur;
 import java.sql.SQLException;
