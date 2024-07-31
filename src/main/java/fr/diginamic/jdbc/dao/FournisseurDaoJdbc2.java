@@ -8,7 +8,6 @@ import static fr.diginamic.TestConnexionJdbc.*;
 
 public class FournisseurDaoJdbc2 implements FournisseurDao {
 
-
     @Override
     public List<Fournisseur> extraire() {
         List<Fournisseur> fournisseurs = new ArrayList<>();
@@ -74,13 +73,11 @@ public class FournisseurDaoJdbc2 implements FournisseurDao {
         return rowDeleted;
     }
 
-    @Override
     public void deleteFournisseur(int id) {
-
+        // Implementation here
     }
 
-    @Override
     public void insertFournisseur(Fournisseur fournisseur) {
-
+        // Implementation here
     }
 }

@@ -6,8 +6,11 @@ import java.util.List;
 
 public interface FournisseurDao {
     void insert(Fournisseur fournisseur) throws SQLException;
+
     List<Fournisseur> extraire() throws SQLException;
+
     int update(String oldName, String newName) throws SQLException;
+
     boolean delete(Fournisseur fournisseur) throws SQLException;
 
     void insertFournisseur(Fournisseur fournisseur);
