@@ -59,11 +59,11 @@ public class Article {
     @Override
     public String toString() {
         return "Article{" +
-                "id=" + id +
-                ", ref='" + ref + '\'' +
-                ", designation='" + designation + '\'' +
-                ", prix=" + prix +
-                ", fournisseur=" + fournisseur +
+                "id : " + id +
+                ", ref : " + ref +
+                ", designation : " + designation +
+                ", prix : " + prix + " €" +
+                ", fournisseur : " + fournisseur.getNom() +
                 '}';
     }
 }

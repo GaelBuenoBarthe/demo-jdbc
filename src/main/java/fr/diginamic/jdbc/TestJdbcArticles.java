@@ -51,7 +51,7 @@ public class TestJdbcArticles {
 
             // Calculer et afficher le prix moyen
             double averagePrix = articleDao.getAveragePrix();
-            System.out.println("Prix moyen: " + averagePrix);
+            System.out.println("Prix moyen: " + String.format("%.2f", averagePrix) + "€");
 
             // Supprimer des articles par nom
             articleDao.deleteArticlesByName();
